@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+
+int findDuplicate(vector<int> &arr, int n){
+	
+	int low = 0, high = n-1, count;
+
+	while(low <= high){
+		int mid = low + (high-low)/2;
+		count = 0;
+		for(auto it : arr){
+			if(it <= mid){
+				count++;
+			}
+		}
+        if(count <= mid) low = mid + 1;
+		else high = mid - 1;
+	}
+	return low;
+}
