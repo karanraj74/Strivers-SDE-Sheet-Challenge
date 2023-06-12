@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+pair<int,int> missingAndRepeating(vector<int> &arr, int n)
+{
+	unordered_map<int,int>mp;
+	int missing,repeat;
+	for(int i=0;i<n;i++){
+		if(mp[arr[i]] > 0){
+			repeat = arr[i];
+			break;
+		}
+		mp[arr[i]]++;
+	}
+
+	int sum = accumulate(arr.begin(),arr.end(),0);
+	sum -= repeat;
+	int sumOfNth = n * (n+1)/2;
+	missing = sumOfNth - sum;
+    
+	pair<int,int>ans;
+	ans.first = missing;
+	ans.second = repeat;
+
+	return ans; 
+}
