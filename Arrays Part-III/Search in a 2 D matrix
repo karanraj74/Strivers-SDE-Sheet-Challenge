@@ -1,0 +1,70 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& mat, int target) {
+        
+        //APPROACH 3 -> correct binary search
+         //  mid = start + (end-start)/2;
+        //  val = mat[mid/m][mid%m] --> mid value
+          int n = mat.size();
+          int m = mat[0].size();
+          int start = 0, end = m*n-1;
+          while(start <= end){
+              int mid = start + (end-start)/2;
+              int val = mat[mid/m][mid%m];
+              if(val == target){
+                  return true;
+              }
+              else if(val > target){
+                  end = mid - 1;
+              }
+              else{
+                  start = mid + 1;
+              }
+          }
+          return false;
+
+        // APPROACH 2-> Binary search
+  
+        // int n = mat.size();
+        // int m = mat[0].size();
+        // int s = 0;
+        // int flag = 0;
+        // while(s<n){
+        //     if(target>=mat[s][0] && target<=mat[s][m-1]){
+        //         flag = 1;
+        //         break;
+        //     }
+        //     s++;
+        // }
+        // if(flag == 0){
+        //     return false;
+        // }
+        // int l = 0,e = m-1;
+        // while(l<=e){
+        //     int mid = l + (e-l)/2;
+        //     if(mat[s][mid] == target){
+        //         return true;
+        //     }
+        //     else if(mat[s][mid]<target){
+        //           l = mid+1;
+        //     }
+        //     else{
+        //         e = mid-1;
+        //     }
+        // }
+        // return false;
+
+        // APPROACH 1 ->
+
+        // int n=matrix.size();
+        // int m=matrix[0].size();
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<m;j++){
+        //         if(matrix[i][j]==target){
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
+    }
+};
