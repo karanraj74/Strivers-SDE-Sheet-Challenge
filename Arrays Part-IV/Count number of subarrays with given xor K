@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+int subarraysXor(vector<int> &arr, int x)
+{
+    //    Write your code here.
+    unordered_map<int,int>mp;
+    int n = arr.size();
+
+    int count = 0;
+    int xxor = 0;
+    for(int i=0;i<n;i++){
+        xxor = xxor^arr[i];
+        if(xxor == x){
+            count++;
+        }
+        if(mp.find(xxor^x) != mp.end()){
+            count += mp[xxor^x];
+        }
+        mp[xxor]++;
+    }
+    return count;
+}
