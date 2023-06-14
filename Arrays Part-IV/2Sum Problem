@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+vector<vector<int>> pairSum(vector<int> &arr, int target){
+   // Write your code here.
+   int n = arr.size();
+   vector<vector<int>>ans;
+    unordered_map<int,int>mp;
+    sort(arr.begin(),arr.end());
+
+    for(int i=0;i<n;i++){
+        int partialSum = target - arr[i];
+        if(mp.find(partialSum) != mp.end()){
+           int c = mp[partialSum];
+           for(int j=0;j<c;j++){
+             ans.push_back({partialSum, arr[i]});
+           }
+        }
+        mp[arr[i]]++;
+    }
+    sort(ans.begin(),ans.end());
+    return ans;
+}
