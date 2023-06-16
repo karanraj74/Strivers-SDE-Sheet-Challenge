@@ -1,0 +1,41 @@
+bool isPalindrome(LinkedListNode<int> *head) {
+    LinkedListNode<int>* slow = head;
+    LinkedListNode<int>* fast = head;
+    
+    if(head == NULL || head->next == NULL) return true;
+    // finding the middle node
+    while(fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // reversing the nodes after middle
+    LinkedListNode<int>* prev = slow;
+    slow = slow->next;
+    prev->next = NULL;
+    
+    LinkedListNode<int>* nextNode;
+
+    while(slow){
+        nextNode = slow->next;
+        slow->next = prev;
+        prev = slow;
+        slow = nextNode;
+    }
+
+    // checking for palindrome
+    fast = head;
+    slow = prev;
+    while(slow){
+        if(fast->data != slow->data){
+            return false;
+        }
+        else{
+            fast = fast->next;
+            slow = slow->next;
+        }
+        
+    }
+    return true;
+
+}
