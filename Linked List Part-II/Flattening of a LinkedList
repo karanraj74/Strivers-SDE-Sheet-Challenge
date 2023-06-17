@@ -1,0 +1,32 @@
+Node* merge(Node* a,Node* b){
+    Node* temp = new Node(0);
+    Node* ans = temp;
+    
+    while(a && b){
+        if(a->data < b->data){
+            temp->child = a;
+            temp = temp->child;
+            a = a->child;
+        }
+        else{
+            temp->child = b;
+            temp = temp->child;
+            b = b->child;
+        }
+    }
+	
+    if(a) temp->child = a;
+    else temp->child = b;
+
+    return ans->child;
+}
+
+Node* flattenLinkedList(Node* root) 
+{
+   if(root == NULL || root->next == NULL) return root;
+   
+   Node* l = flattenLinkedList(root->next);
+   root->next = NULL;
+   Node *newHead = merge(root,l);
+   return newHead;	
+}
