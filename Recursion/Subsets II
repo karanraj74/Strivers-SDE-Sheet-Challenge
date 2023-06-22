@@ -1,0 +1,26 @@
+#include <bits/stdc++.h> 
+void solve(int idx,vector<int>nums,vector<int>&v,vector<vector<int>>&ans){
+        // base case
+        if(idx == nums.size()){
+            ans.push_back(v);
+            return;
+        }
+        // recursive case
+           // pick it
+           v.push_back(nums[idx]);
+           solve(idx+1,nums,v,ans);
+           v.pop_back();
+           //skip
+           while(idx+1 < nums.size() && nums[idx] == nums[idx+1]) idx++;
+           solve(idx+1,nums,v,ans);
+}
+vector<vector<int>> uniqueSubsets(int n, vector<int> &nums)
+{
+    // Write your code here.
+    vector<vector<int>>ans;
+        vector<int>v;
+        sort(nums.begin(),nums.end());
+        solve(0,nums,v,ans);
+        sort(ans.begin(),ans.end());
+        return ans;
+}
