@@ -1,0 +1,18 @@
+void solve(int idx, int sum, vector<int> &nums, vector<int> &ans) {
+  // base case
+    if(idx == nums.size()){
+		ans.push_back(sum);
+		return;
+     }
+	// recursive case
+	sum += nums[idx];
+	solve(idx+1,sum,nums,ans);
+	sum -= nums[idx];
+	solve(idx+1,sum,nums,ans);
+}
+vector<int> subsetSum(vector<int> &nums){
+	vector<int>ans;
+	solve(0,0,nums,ans);
+	sort(ans.begin(),ans.end());
+	return ans;
+}
