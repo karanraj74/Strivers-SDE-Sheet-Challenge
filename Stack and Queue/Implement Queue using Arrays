@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+int arr[100];
+int front = 0;
+int rear = 0;
+int cnt = 0;
+
+void push(int n){
+	arr[rear % 100] = n;
+	rear++;
+	cnt++;
+}
+void pop(){
+	arr[front % 100] = -1;
+	front++;
+	cnt--;
+}
+int Front(){
+	if(cnt == 0) return -1;
+	return arr[front % 100];
+}
+int main() {
+    int n;
+    cin>>n;
+    int k;
+    for(int i=0;i<n;i++){
+    	cin>>k;
+    	push(k);
+    }
+    for(int i=0;i<n;i++){
+    	cout<<Front()<<" ";
+    	pop();
+    }
+	return 0;
+}
