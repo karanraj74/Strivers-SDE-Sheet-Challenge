@@ -1,35 +1,42 @@
-#include <bits/stdc++.h>
-using namespace std;
-int arr[100];
-int front = 0;
-int rear = 0;
-int cnt = 0;
-
-void push(int n){
-	arr[rear % 100] = n;
-	rear++;
-	cnt++;
-}
-void pop(){
-	arr[front % 100] = -1;
-	front++;
-	cnt--;
-}
-int Front(){
-	if(cnt == 0) return -1;
-	return arr[front % 100];
-}
-int main() {
+#include <bits/stdc++.h> 
+class Queue {
+public:
+    vector<int>q;
     int n;
-    cin>>n;
-    int k;
-    for(int i=0;i<n;i++){
-    	cin>>k;
-    	push(k);
+    int Front;
+    int rear;
+    Queue() {
+        // Implement the Constructor
+        n = 10001;
+        q.resize(n);
+        Front = 0;
+        rear = 0;
     }
-    for(int i=0;i<n;i++){
-    	cout<<Front()<<" ";
-    	pop();
+
+    /*----------------- Public Functions of Queue -----------------*/
+
+    bool isEmpty() {
+        // Implement the isEmpty() function
+        if(rear == Front) return 1;
+        return 0;
     }
-	return 0;
-}
+
+    void enqueue(int data) {
+        // Implement the enqueue() function
+        if(rear != n){
+            q[rear++] = data;
+        }
+    }
+
+    int dequeue() {
+        // Implement the dequeue() function
+        if(rear == Front) return -1;
+        return q[Front++];
+    }
+
+    int front() {
+        // Implement the front() function
+        if(Front == rear) return -1;
+        return q[Front];
+    }
+};
