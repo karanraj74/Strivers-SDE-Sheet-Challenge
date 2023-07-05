@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+priority_queue<int>leftpq;
+priority_queue<int,vector<int>,greater<int>>rightpq;
+int size = 0;
+int mid;
+void add(int num){
+    size++;
+    if(size == 1) mid = num;
+    else if(size % 2 == 0){
+       if(num < mid){
+           leftpq.push(num);
+           rightpq.push(mid);
+       }
+       else{
+           leftpq.push(mid);
+           rightpq.push(num);
+       }
+    }
+    else{
+        if(leftpq.top() > num){
+           leftpq.push(num);
+           mid = leftpq.top();
+           leftpq.pop();
+        }
+        else{
+          rightpq.push(num);
+          mid = rightpq.top();
+          rightpq.pop();
+        }
+    }
+}
+void findMedian(int *arr, int n)
+{
+    for(int i=0;i<n;i++){
+        add(arr[i]);
+        int median = 0;
+        if(size % 2 == 0){
+            median = (leftpq.top() + rightpq.top()) / 2;
+        }
+        else{
+            median = mid;
+        }
+        cout<<median<<" "; 
+    }
+}
