@@ -1,0 +1,30 @@
+int search(int* arr, int n, int key) {
+    // Write your code here.
+    int lo = 0,hi = n - 1;
+
+	while(lo <= hi){
+		int mid = lo + (hi - lo) / 2;
+		if(arr[mid] == key) return mid;
+
+        // if left is sorted
+        if(arr[lo] <= arr[mid]){
+           if(arr[lo] <= key && arr[mid] >= key){
+               hi = mid - 1;
+           }
+           else{
+               lo = mid + 1;
+           }
+        }
+
+        // if right is sorted
+        else{
+           if(arr[mid] <= key && arr[hi] >= key){
+               lo = mid + 1;
+           }
+           else{
+               hi = mid - 1;
+           }
+        }
+	}
+    return -1;
+}
